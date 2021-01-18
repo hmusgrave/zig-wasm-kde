@@ -44,6 +44,7 @@ const js_ptr = enum(c_uint) {
 
 export fn main() void {
     if (data(std.heap.page_allocator)) |a| {
+        defer std.heap.page_allocator.free(a);
         for (a) |item, idx| {
             bufLog("{}: {}\n", .{ idx, item });
         }
